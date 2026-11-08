@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  role_name: apache
+  namespace: avi1505
+  author: avi1505
+  description: Installeert en configureert Apache op Ubuntu 24.04.
+  license: MIT
+  min_ansible_version: "2.19"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - noble
+
+  galaxy_tags:
+    - apache
+    - web
+    - ubuntu
+
+dependencies: []

@@ -1,0 +1,29 @@
+---
+- name: Apache installeren
+  ansible.builtin.apt:
+    name: "{{ apache_package }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Apache hostname configureren
+  ansible.builtin.template:
+    src: servername.conf.j2
+    dest: /etc/apache2/conf-available/servername.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Apache herstarten
+
+- name: Server hostname configureren
+  ansible.builtin.file:
+    src: /etc/apache2/conf-available/servername.conf
+    dest: /etc/apache2/conf-enabled/servername.conf
+    state: link
+  notify: Apache herstarten
+
+- name: Apache starten en automatisch laten opstarten
+  ansible.builtin.service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: true
